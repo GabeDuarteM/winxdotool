@@ -34,12 +34,18 @@ namespace winxdotool
 
                 string x = args[2];
                 string y = args[3];
-                Win32.POINT p = new Win32.POINT();
-                p.x = Convert.ToInt16(x);
-                p.y = Convert.ToInt16(y);
 
-                Win32.ClientToScreen(hWnd, ref p);
-                Win32.SetCursorPos(p.x, p.y);
+
+                int screenWidth = 1920;
+                int screenHeight = 1080;
+
+                // Mickey X coordinate
+                int mic_x = (int)System.Math.Round(Convert.ToInt32(x) * 65536.0 / screenWidth);
+                // Mickey Y coordinate
+                int mic_y = (int)System.Math.Round(Convert.ToInt32(y) * 65536.0 / screenHeight);
+
+                // 0x0001 | 0x8000: Move + Absolute position
+                Win32.mouse_event(0x0001 | 0x8000, Convert.ToUInt32(mic_x), Convert.ToUInt16(mic_y), 0, UIntPtr.Zero);
 
             }
             else if (action == "click")

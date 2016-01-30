@@ -9,12 +9,6 @@ namespace winxdotool
 {
     public class Win32
     {
-        [DllImport("User32.Dll")]
-        public static extern long SetCursorPos(int x, int y);
-
-        [DllImport("User32.Dll")]
-        public static extern bool ClientToScreen(IntPtr hWnd, ref POINT point);
-
         [DllImport("user32.dll", SetLastError = true)]
         public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
@@ -25,11 +19,5 @@ namespace winxdotool
         public const uint MOUSEEVENTF_RIGHTDOWN = 0x08;
         public const uint MOUSEEVENTF_RIGHTUP = 0x10;
 
-        [StructLayout(LayoutKind.Sequential)]
-        public struct POINT
-        {
-            public int x;
-            public int y;
-        }
     }
 }
